@@ -1,0 +1,42 @@
+package sorting;
+
+// In selection sort we try to maintain 2 arrays
+// 1. sorted and the other is unsorted
+
+public class SelectionSort {
+
+	public static void main(String[] args) {
+		
+		int[] arr = {2,3,6,3,0,-1,9} ;
+		sort(arr) ;
+		for(int x : arr) {
+			System.out.print(" "+ x);
+		}
+
+	}
+	
+	public static void sort(int[] arr) {
+		
+		int n = arr.length ;
+		boolean isSorted   ;
+		for(int i =0 ; i < n-1 ; ++i ) {
+			int min = i ;
+			isSorted = true ;
+			for(int j = i+1 ; j < n ; ++j) {
+				if(arr[j] < arr[min]) {
+					min = j ;
+					isSorted = false ;
+				}
+			}
+			
+			if(min != i) {
+				int temp  = arr[i] ;
+				arr[i] = arr[min] ;
+				arr[min] = temp  ;
+			}
+			if(isSorted) {return ;}
+		}
+	}
+	
+
+}
