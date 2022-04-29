@@ -1,0 +1,72 @@
+package sorting;
+
+public class MergeSort {
+
+	public static void main(String[] args) {
+	
+		int[] arr = {2,3,6,3,0,-1,9} ;
+		int si = 0 ;
+		int ei = arr.length-1 ;
+		divide(arr, si, ei) ;
+		for(int x : arr) {
+			System.out.print(" "+ x);
+		}
+
+	}
+	
+	public static void divide(int[] arr, int si, int ei) {
+		
+		int mid = si + (ei-si)/2 ;
+		if(si >= ei) {
+			return ;
+		}
+		
+		// dividing the array using recursion
+		divide(arr, si, mid);
+		divide(arr, mid+1, ei);
+		
+		// Conquer back the array by calling conquer()
+		conquer(arr, si, mid, ei) ;
+	}
+
+	private static void conquer(int[] arr, int si, int mid, int ei) {
+		
+		System.out.println("si is: "+ si +" mid is: "+ mid +" ei is: "+ ei);
+		int[] merged = new int[ei-si+1] ;
+		int ls = si ;
+		int rs = mid+1 ;
+		int index = 0 ;
+		
+		while(ls <= mid && rs <= ei) {
+			
+			if(arr[ls] < arr[rs]) {
+				merged[index] = arr[ls] ;
+				index++ ;
+				ls++ ;
+			}
+			else {
+				merged[index] = arr[rs] ;
+				index++ ;
+				rs++ ;
+			}
+		}
+		
+		while(ls <= mid  ) {
+			merged[index] = arr[ls] ;
+			index++ ;
+			ls++ ;
+		}
+		while(rs <= ei) {
+			merged[index] = arr[rs] ;
+			index++ ;
+			rs++ ;
+		}
+		
+		for(int k= 0,j=si ; k<merged.length ; k++, j++) {
+			arr[j] = merged[k] ;
+		}
+		
+		
+	}
+
+}
