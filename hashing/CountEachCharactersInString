@@ -1,0 +1,43 @@
+package com.hashing;
+
+// To print all characters and their count in a given string
+// This can be done by using HashMap 
+
+import java.util.Map ;
+import java.util.HashMap ;
+import java.util.Set; 
+import java.util.HashSet ;
+
+public class Characters_Count_In_String {
+
+	public static void main(String[] args) {
+		
+		String str = "aabbbccaaddddfc" ;
+		countChar(str);
+
+	}
+	
+	public static void countChar(String str) {
+		
+		char ch[] = str.toCharArray() ;
+		HashMap<Character, Integer> map = new HashMap<>() ;
+		
+		// Check if the given character is present in Map or not, accordingly perform operation
+		for(Character c : ch) {
+			if(map.containsKey(c)) {
+				map.put(c, map.get(c)+1) ;
+			}
+			else {
+				map.put(c, 1) ;
+			}
+		}
+		
+		// Now print the map objects and their count 
+		Set<Map.Entry<Character, Integer>> set = map.entrySet();
+		for( Map.Entry<Character, Integer> entry : set) {
+			System.out.printf("%s:%d%n", entry.getKey(),entry.getValue());
+		}
+		
+	}
+
+}
