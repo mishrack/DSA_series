@@ -1,0 +1,59 @@
+package sorting;
+
+public class QuickSort {
+
+	public static void main(String[] args) {
+	
+		int[] arr = {3,2, -1, 9, 8,4,7, 0} ;
+		int lb = 0 ;
+		int ub = arr.length-1 ;
+		quickSort(arr, lb, ub);
+		for(int i : arr) {
+			System.out.print(" " + i);
+		}
+
+	}
+
+	public static void quickSort(int[] arr, int lb , int ub) {
+		
+		if(lb < ub) {
+			
+			// calling partition method 
+			int pivot =  partitioning(arr, lb, ub) ;
+			
+			// now recursively calling quicksort method for further partitioning
+			quickSort(arr, lb, pivot-1);
+			quickSort(arr, pivot+1, ub);
+			
+		}
+	}
+	
+	public static int  partitioning(int[] arr, int lb, int ub) {
+		
+		int start = lb ;
+		int end = ub ;
+		int pivot = lb ;
+		
+		while(start < end) {
+			
+			if(arr[start] <= arr[pivot]) {
+				start++ ;
+			}
+			if(arr[end] > arr[pivot]) {
+				end-- ;
+			}
+			
+			// swap element at start and end
+			int temp = arr[end] ;
+			arr[end] = arr[start] ;
+			arr[start] = temp ;
+		}
+		
+		// swap element at start and end
+			int temp = arr[end] ;
+			arr[end] = arr[pivot] ;
+			arr[pivot] = temp ;
+		
+		return end; 
+	}
+}
