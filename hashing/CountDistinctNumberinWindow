@@ -1,0 +1,41 @@
+package com.hashing;
+
+import java.util.HashMap;
+
+public class Count_DistinctElements_InWindow {
+
+	public static void main(String[] args) {
+		
+		int arr[] = {10, 10,5,9,0,2,0, -5, -5, -20, -20} ;
+		countDistinctNumInWindow(arr, 4);
+
+	}
+	
+	public static void countDistinctNumInWindow(int arr[], int k) {
+		
+		HashMap<Integer, Integer> map = new HashMap<>() ;
+		
+		// Creating window of size k
+		for(int i = 0 ; i < k ; i++) {
+			map.put(arr[i], map.getOrDefault(arr[i], 0)+1) ;
+		}
+		System.out.println("Number of distinct elements in current window are : " + map.size());
+		
+		for(int j = k ; j< arr.length; j++) {
+			
+			// if the count of element is 1 then remove it
+			if(map.get(arr[j-k]) == 1) {
+				map.remove(arr[j - k]) ;
+			}
+			else {  // if the count of element is greater than 1 ,then just subtract 1 from it.
+				map.put(arr[j-k], map.get(arr[j-k])-1) ;
+			}
+			
+			// if any new element comes , add it to the map
+			map.put(arr[j], map.getOrDefault(arr[j], 0)+1) ;
+			System.out.println("Number of distinct elements in current window are : " + map.size());
+		}
+		
+	}
+
+}
