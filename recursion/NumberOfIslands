@@ -1,0 +1,48 @@
+package recursion;
+
+// Find the number of islands in a given 2-D matrix of 1 and 0
+
+public class NumberOfIslands {
+
+	public static void main(String[] args) {
+		int[][] arr = {{1,1,1,0},{1,1,0,0},{0,0,1,0}} ;
+		System.out.println(count(arr));
+		
+	}
+
+	public static int count(int[][] nums) {
+
+		int count = 0;
+		for (int i = 0; i < nums.length; i++) {
+			for (int j = 0; j < nums[i].length; j++) {
+
+				if (nums[i][j] == 1) {
+					count++;
+					callDFS(nums, i, j);
+				}
+			}
+
+		}
+
+		return count;
+	}
+
+	private static void callDFS(int[][] nums, int i, int j) {
+
+		// checking edge cases 
+		if (i < 0 || j < 0 || i > nums.length-1 || j > nums[i].length-1 || nums[i][j] == 0) {
+			return;
+		}
+		// once number is added to the island , make it as 0
+		nums[i][j] = 0;
+		
+		// now recursively call for traversing in four directions
+		
+		callDFS(nums, i + 1, j); // up
+		callDFS(nums, i - 1, j); // down
+		callDFS(nums, i, j + 1); // right
+		callDFS(nums, i, j - 1); // left
+
+	}
+
+}
